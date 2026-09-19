@@ -1,0 +1,75 @@
+MR SIX RECRUITMENT AGENCY - HOW TO GET AN ANDROID APK
+=======================================================
+
+This folder is a ready-to-install app (a Progressive Web App / PWA).
+It already works like a real app: it can be installed on a phone,
+runs offline, has its own icon, and opens full-screen with no browser bar.
+
+You now have TWO easy ways to get it onto Android:
+
+
+--------------------------------------------------------
+OPTION 1 (FASTEST - no APK needed): Install directly
+--------------------------------------------------------
+1. Put this whole folder online (any web host, or open index.html
+   through a simple web server / GitHub Pages).
+2. Open that link in Chrome on your Android phone.
+3. Tap the menu (three dots) -> "Add to Home screen" / "Install app".
+4. Done - it appears as an app icon and opens full-screen.
+
+
+--------------------------------------------------------
+OPTION 2 (REAL .APK FILE): Use PWABuilder (free, official)
+--------------------------------------------------------
+PWABuilder (by Microsoft) turns this app into a signed Android APK.
+
+1. Host this folder online so it has a public https:// address
+   (e.g. GitHub Pages, Netlify drop, or any web host). The URL must
+   point to index.html and be reachable over HTTPS.
+2. Go to:  https://www.pwabuilder.com
+3. Paste your https link and press Start.
+4. Click "Package for stores" -> "Android".
+5. Download the generated package - it contains:
+      - app-release-signed.apk   (install this on the phone)
+      - the .aab file (for Google Play, if you ever publish)
+6. Copy the .apk to your Android phone and open it to install.
+   (You may need to allow "Install unknown apps" in Settings.)
+
+
+--------------------------------------------------------
+OPTION 3 (build it yourself): Capacitor / Android Studio
+--------------------------------------------------------
+If you have a computer with Android Studio + Node.js:
+
+   npm install -g @capacitor/cli
+   npm init -y
+   npm install @capacitor/core @capacitor/android
+   npx cap init "Mr Six" com.mrsix.recruitment --web-dir=.
+   npx cap add android
+   npx cap copy
+   npx cap open android
+
+Then in Android Studio:  Build -> Build APK(s).
+The APK appears in android/app/build/outputs/apk/.
+
+
+--------------------------------------------------------
+WHAT'S IN THIS FOLDER
+--------------------------------------------------------
+  index.html        - the full recruitment app
+  manifest.json     - app name, icons, colors (required for install)
+  sw.js             - service worker (offline support)
+  icons/            - app icons (192, 512, maskable, apple, favicon)
+
+App identity you can reuse when packaging:
+  App name    : Mr Six Recruitment Agency
+  Package ID  : com.mrsix.recruitment
+  Theme color : #0b1a36 (navy)
+
+Demo logins:
+  Agent     : mrsix / agent123
+  Applicant : chimwemwe / pass123
+
+Note: an actual .apk cannot be compiled inside this workspace because
+the Android SDK build tools are not available here. The steps above
+let you produce a real signed APK in a few minutes with no coding.
